@@ -10,6 +10,8 @@ if not ProtectParentModule then
     return
 end
 
+if ProtectParentModule.GetParent():FindFirstChild("Invisibility UI") then return end
+
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local PositionAboveVoid = Vector3.new(0, workspace.FallenPartsDestroyHeight + 10, 0)
 
