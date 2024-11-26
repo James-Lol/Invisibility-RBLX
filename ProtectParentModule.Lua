@@ -22,7 +22,7 @@ function ParentModule.GetParent()
 	return ParentInstance
 end
 
-function HasGui(GuiName)
+function ParentModule.HasGui(GuiName)
 	local ParentInstance = ParentModule.GetParent()
 	if ParentInstance:FindFirstChild(GuiName) then
 		return true
