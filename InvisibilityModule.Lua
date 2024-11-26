@@ -1,0 +1,79 @@
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local InvisibleSeat = nil
+local AvatarTransparency = 0
+local PreviousHideCFrame = CFrame.new(0, 0, 0)
+local IsVisible = true
+
+local InvisibilityModule = {}
+
+local function GenerateRandomString(Length)
+	local Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	local Result = {}
+	for Index = 1, Length do
+		local RandomIndex = math.random(1, #Characters)
+		Result[Index] = Characters:sub(RandomIndex, RandomIndex)
+	end
+	return table.concat(Result)
+end
+
+function InvisibilityModule.TurnVisible()
+	IsVisible = true
+	AvatarTransparency = 0
+	if InvisibleSeat then
+		InvisibleSeat:Destroy()
+		InvisibleSeat = nil
+	end
+end
+
+function InvisibilityModule.TurnInvisible(HideCFrame)
+	if not HideCFrame then return false end
+
+	PreviousHideCFrame = HideCFrame
+	IsVisible = false
+
+	InvisibilityModule.TurnVisible()
+
+	local Character = LocalPlayer.Character
+	if not Character then return false end
+	local Torso = Character:FindFirstChild("UpperTorso") or Character:FindFirstChild("Torso")
+	if not Torso then return false end
+
+	local OriginalCharacterCFrame = Character:GetPivot()
+
+	for i = 0, 5, 1 do
+		Character:PivotTo(HideCFrame)
+		task.wait(0.01)
+	end
+
+	Character:PivotTo(HideCFrame)
+
+	InvisibleSeat = Instance.new("Seat")
+	InvisibleSeat.Parent = game:GetService("Workspace")
+	InvisibleSeat.Name = GenerateRandomString(250)
+	InvisibleSeat.Anchored = false
+	InvisibleSeat.CanCollide = false
+	InvisibleSeat.CanQuery = false
+	InvisibleSeat.CanTouch = false
+	InvisibleSeat.Transparency = 1
+	InvisibleSeat.CFrame = OriginalCharacterCFrame
+
+	local Weld = Instance.new("Weld", InvisibleSeat)
+	Weld.Part0 = InvisibleSeat
+	Weld.Part1 = Torso
+
+	Character:PivotTo(OriginalCharacterCFrame)
+
+	AvatarTransparency = 0.9
+
+	return true
+end
+
+function InvisibilityModule.Resynchronize()
+	if IsVisible then
+		InvisibilityModule.TurnVisible()
+	else
+		InvisibilityModule.TurnInvisible(PreviousHideCFrame)
+	end
+end
+
+return InvisibilityModule
