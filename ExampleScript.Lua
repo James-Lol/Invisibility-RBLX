@@ -1,16 +1,16 @@
 local InvisibilityModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/James-Lol/Invisibility-RBLX/refs/heads/main/InvisibilityModule.Lua"))()
 if not InvisibilityModule then
-    warn("Failed to load InvisibilityModule.")
-    return
+	warn("Failed to load InvisibilityModule.")
+	return
 end
 
 local ProtectParentModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/James-Lol/Invisibility-RBLX/refs/heads/main/ProtectParentModule.Lua"))()
 if not ProtectParentModule then
-    warn("Failed to load ProtectParentModule.")
-    return
+	warn("Failed to load ProtectParentModule.")
+	return
 end
 
-if ProtectParentModule.GetParent():FindFirstChild("Invisibility UI") then return end
+if ProtectParentModule.HasGui("Invisibility UI") then return end
 
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local PositionAboveVoid = Vector3.new(0, workspace.FallenPartsDestroyHeight + 10, 0)
@@ -63,28 +63,28 @@ UICorner2.Parent = ReSync
 local IsInvisible = false
 
 local function onCharacterAdded(character)
-    IsInvisible = false
-    Toggle.Text = "Turn Invisible"
-    InvisibilityModule.TurnVisible()
+	IsInvisible = false
+	Toggle.Text = "Turn Invisible"
+	InvisibilityModule.TurnVisible()
 end
 
 LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
 
 Toggle.MouseButton1Click:Connect(function()
-    IsInvisible = not IsInvisible
-    if IsInvisible then
-        local Character = LocalPlayer.Character
-        Toggle.Text = "Turn Visible"
-        if Character then
-            local CharacterCframe = Character:GetPivot()
-            InvisibilityModule.TurnInvisible(CFrame.new(CharacterCframe.Position.X, PositionAboveVoid.Y, CharacterCframe.Position.Z))
-        end
-    else
-        Toggle.Text = "Turn Invisible"
-        InvisibilityModule.TurnVisible()
-    end
+	IsInvisible = not IsInvisible
+	if IsInvisible then
+		local Character = LocalPlayer.Character
+		Toggle.Text = "Turn Visible"
+		if Character then
+			local CharacterCframe = Character:GetPivot()
+			InvisibilityModule.TurnInvisible(CFrame.new(CharacterCframe.Position.X, PositionAboveVoid.Y, CharacterCframe.Position.Z))
+		end
+	else
+		Toggle.Text = "Turn Invisible"
+		InvisibilityModule.TurnVisible()
+	end
 end)
 
 ReSync.MouseButton1Click:Connect(function()
-    InvisibilityModule.Resynchronize()
+	InvisibilityModule.Resynchronize()
 end)
