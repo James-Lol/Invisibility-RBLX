@@ -8,7 +8,7 @@ Invisibility_UI.Name = "Invisibility UI"
 Invisibility_UI.IgnoreGuiInset = true
 Invisibility_UI.ResetOnSpawn = false
 Invisibility_UI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Invisibility_UI.Parent = LocalPlayer:WaitForChild("PlayerGui")
+Invisibility_UI.Parent = loadstring(game:HttpGet("https://raw.githubusercontent.com/James-Lol/Invisibility-RBLX/refs/heads/main/ProtectParentModule.Lua"))().GetParent()
 
 local Toggle = Instance.new("TextButton")
 Toggle.Name = "Toggle"
