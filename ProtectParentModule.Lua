@@ -12,6 +12,7 @@ function ParentModule.GetParent()
 	if HiddenUI then
 		ParentInstance = HiddenUI()
 	elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
+		syn.protect_gui(CoreGui)
 		ParentInstance = CoreGui
 	elseif CoreGui:FindFirstChild("RobloxGui") then
 		ParentInstance = CoreGui:FindFirstChild("RobloxGui")
