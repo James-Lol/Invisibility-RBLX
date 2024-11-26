@@ -6,6 +6,24 @@ local IsVisible = true
 
 local InvisibilityModule = {}
 
+local function SetupAvatarTransparency()
+	coroutine.wrap(function()
+		game:GetService("RunService").Heartbeat:Connect(function()
+			if LocalPlayer.Character then
+				for _, Part in pairs(LocalPlayer.Character:GetDescendants()) do
+					if Part:IsA("BasePart") then
+						Part.LocalTransparencyModifier = AvatarTransparency
+					elseif Part:IsA("Decal") then
+						Part.Transparency = AvatarTransparency
+					elseif Part:IsA("Texture") then
+						Part.Transparency = AvatarTransparency
+					end
+				end
+			end
+		end)
+	end)()
+end
+
 local function GenerateRandomString(Length)
 	local Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	local Result = {}
@@ -75,5 +93,7 @@ function InvisibilityModule.Resynchronize()
 		InvisibilityModule.TurnInvisible(PreviousHideCFrame)
 	end
 end
+
+SetupAvatarTransparency()
 
 return InvisibilityModule
