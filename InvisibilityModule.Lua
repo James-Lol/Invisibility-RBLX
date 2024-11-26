@@ -89,7 +89,7 @@ function InvisibilityModule.TurnInvisible(HideCFrame)
 end
 
 function InvisibilityModule.Resynchronize()
-	if IsVisible then
+	if IsVisible == false then
 		InvisibilityModule.TurnVisible()
 	else
 		InvisibilityModule.TurnInvisible(PreviousHideCFrame)
