@@ -14,7 +14,7 @@ function ParentModule.GetParent()
 	elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
 		ParentInstance = CoreGui
 	elseif CoreGui:FindFirstChild("RobloxGui") then
-		ParentInstance = CoreGui.RobloxGui
+		ParentInstance = CoreGui:FindFirstChild("RobloxGui")
 	else
 		ParentInstance = CoreGui
 	end
