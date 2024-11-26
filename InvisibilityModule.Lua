@@ -47,9 +47,9 @@ function InvisibilityModule.TurnInvisible(HideCFrame)
 	if not HideCFrame then return false end
 
 	PreviousHideCFrame = HideCFrame
-	IsVisible = false
-
 	InvisibilityModule.TurnVisible()
+	
+	IsVisible = false
 
 	local Character = LocalPlayer.Character
 	if not Character then return false end
@@ -58,7 +58,7 @@ function InvisibilityModule.TurnInvisible(HideCFrame)
 
 	local OriginalCharacterCFrame = Character:GetPivot()
 
-	for i = 0, 5, 1 do
+	for i = 0, 4, 1 do
 		Character:PivotTo(HideCFrame)
 		task.wait(0.01)
 	end
@@ -87,8 +87,7 @@ function InvisibilityModule.TurnInvisible(HideCFrame)
 end
 
 function InvisibilityModule.Resynchronize()
-	print(IsVisible)
-	if IsVisible == false then
+	if IsVisible then
 		InvisibilityModule.TurnVisible()
 	else
 		InvisibilityModule.TurnInvisible(PreviousHideCFrame)
