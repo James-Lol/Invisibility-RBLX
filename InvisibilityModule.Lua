@@ -35,6 +35,7 @@ local function GenerateRandomString(Length)
 end
 
 function InvisibilityModule.TurnVisible()
+	print("Turning Visible")
 	IsVisible = true
 	AvatarTransparency = 0
 	if InvisibleSeat then
@@ -44,6 +45,7 @@ function InvisibilityModule.TurnVisible()
 end
 
 function InvisibilityModule.TurnInvisible(HideCFrame)
+	print("Turning Invisible")
 	if not HideCFrame then return false end
 
 	PreviousHideCFrame = HideCFrame
